@@ -1,4 +1,4 @@
-package net.thumbtack.school.pictures.v1;
+package net.thumbtack.school.pictures.v2;
 
 public class SignedRectPicture extends RectPicture {
 

@@ -1,19 +1,22 @@
-package net.thumbtack.school.pictures.v1;
+package net.thumbtack.school.iface.v2;
 
-import java.util.Objects;
+import net.thumbtack.school.iface.Movable;
+import net.thumbtack.school.iface.Resizable;
+import net.thumbtack.school.winobjects.v2.Desktop;
 
-public class RoundPicture {
+public class RoundPicture extends Picture  {
+
     private Point center;
     private int radius;
-    private int format;
+
 
     public RoundPicture(Point center, int radius, int format) {
+        super(format);
         this.center = center;
         this.radius = radius;
-        this.format = format;
     }
 
-    public RoundPicture(int xCenter,int yCenter, int radius, int format) {
+    public RoundPicture(int xCenter, int yCenter, int radius, int format) {
         this(new Point(xCenter,yCenter), radius,format);
     }
 
@@ -21,7 +24,7 @@ public class RoundPicture {
         this(center,radius,1);
     }
 
-    public RoundPicture(int xCenter,int yCenter, int radius) {
+    public RoundPicture(int xCenter, int yCenter, int radius) {
         this(new Point(xCenter,yCenter),radius);
     }
 
@@ -33,18 +36,14 @@ public class RoundPicture {
         return radius;
     }
 
-    public int getFormat() {
-        return format;
-    }
 
+    @Override
     public void moveTo(int x, int y){
         center.setX(x);
         center.setY(y);
     }
 
-    public void moveTo(Point point){
-        setCenter(point);
-    }
+
 
     public void setCenter(Point center) {
         this.center = center;
@@ -54,15 +53,13 @@ public class RoundPicture {
         this.radius = radius;
     }
 
-    public void setFormat(int format) {
-        this.format = format;
-    }
-
+    @Override
     public void moveRel(int dx, int dy){
         center.setX(center.getX()+dx);
         center.setY(center.getY()+dy);
     }
 
+    @Override
     public void resize(double ratio){
         double R = ratio*radius;
         if (R<1) R=1;
@@ -70,6 +67,7 @@ public class RoundPicture {
     }
 
 
+    @Override
     public boolean isInside(int x, int y){
         double xCenter = (double) center.getX();
         double yCenter = (double) center.getY();
@@ -78,6 +76,7 @@ public class RoundPicture {
         return Math.sqrt(Math.pow(xCenter-xPoint,2)+Math.pow(yCenter-yPoint,2)) <= radius;
     }
 
+    @Override
     public boolean isInside(Point point){
         double xCenter = (double) center.getX();
         double yCenter = (double) center.getY();
@@ -86,6 +85,7 @@ public class RoundPicture {
         return Math.sqrt(Math.pow(xCenter-xPoint,2)+Math.pow(yCenter-yPoint,2)) <= radius;
     }
 
+    @Override
     public boolean isFullyVisibleOnDesktop(Desktop desktop){
         Point bottomRight = new Point(desktop.getWidth(),desktop.getHeight());
         return     center.getX()+radius <= bottomRight.getX()-1
@@ -98,13 +98,18 @@ public class RoundPicture {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         RoundPicture that = (RoundPicture) o;
-        return radius == that.radius && format == that.format && Objects.equals(center, that.center);
+
+        if (getRadius() != that.getRadius()) return false;
+        return getCenter() != null ? getCenter().equals(that.getCenter()) : that.getCenter() == null;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(center, radius, format);
+        int result = getCenter() != null ? getCenter().hashCode() : 0;
+        result = 31 * result + getRadius();
+        return result;
     }
 }
 
