@@ -4,6 +4,7 @@ import net.thumbtack.school.iface.v2.Movable;
 import net.thumbtack.school.iface.v2.Resizable;
 import net.thumbtack.school.winobjects.v2.Desktop;
 
+// этот класс должен быть в пакете net.thumbtack.school.pictures.v2
 public abstract class Picture implements Movable, Resizable {
 
     private int format;

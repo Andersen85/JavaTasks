@@ -2,7 +2,9 @@ package net.thumbtack.school.pictures.v2;
 
 import net.thumbtack.school.winobjects.v2.Desktop;
 
+
 public class RectPicture extends Picture {
+// REVU где класс Picture ?
     private Point topLeft;
     private Point bottomRight;
 

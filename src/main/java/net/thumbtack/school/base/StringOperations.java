@@ -114,6 +114,7 @@ public class StringOperations {
                 if(string.charAt(i) != string.charAt(string.length()-i-1)) return false;
         }
         return true;
+
     }
 
     public static boolean isPalindromeIgnoreCase(String string) {
@@ -181,10 +182,12 @@ public class StringOperations {
         //Для заданного массива целых чисел создает текстовую строку, в которой числа разделены знаком “запятая”
         // (т.н. формат CSV - comma separated values). Для пустого массива возвращается пустая строка.
         return new String(makeCsvStringBuilderFromInts(array));
+
     }
 
 
     public static String makeCsvStringFromDoubles(double[] array) {
+        // REVU аналогично
         //Для заданного массива вещественных чисел создает текстовую строку, в которой числа разделены знаком “запятая”,
         // причем каждое число записывается с двумя знаками после точки. Для пустого массива возвращается пустая строка.
         return new String(makeCsvStringBuilderFromDoubles(array));
@@ -200,12 +203,10 @@ public class StringOperations {
             if(i!=array.length-1) output.append(array[i] + ",");
         }
         return output;
-
     }
 
     public static StringBuilder makeCsvStringBuilderFromDoubles(double[] array) {
         //То же, что и в упражнении 26, но возвращает StringBuilder.
-
         StringBuilder output = new StringBuilder("");
         if (array==null) return output;
         DecimalFormat f = new DecimalFormat("##.00");
@@ -248,6 +249,5 @@ public class StringOperations {
         if(string1.length()<=string2.length()) return string1.length();
         return string2.length();
     }
-
 
 }

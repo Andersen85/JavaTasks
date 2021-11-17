@@ -10,6 +10,11 @@ public class FirstSteps {
     }
 
     public int div(int x, int y){
+        // REVU это не требовалось, но если уж сделади - почему NullPointerException ?
+        // на это есть
+        // https://docs.oracle.com/javase/7/docs/api/java/lang/ArithmeticException.html
+        // здесь и далее
+        if(y==0) throw new NullPointerException("Y is null!");
         return x/y;
     }
 
@@ -18,7 +23,10 @@ public class FirstSteps {
     }
 
     public boolean isEqual(int x,int y){
-        return x==y;
+        // return x == y;
+        // далее аналогично
+        if(x==y) return true;
+        return false;
     }
 
     public boolean isGreater(int x,int y){
@@ -67,21 +75,22 @@ public class FirstSteps {
         return max;
     }
 
-    public double average(int[] array){
-        if(array.length == 0) return 0.;
+    public double average(int[] array) {
+        if (array.length == 0) return 0.;
         double sum = 0;
-        for(int number: array){
+        for (int number : array) {
             sum += number;
         }
-        return sum/array.length;
+        return sum / array.length;
     }
 
     public boolean isSortedDescendant(int[] array){
         if(array.length==1||array.length==0){
-            return true;
-        }
+            return true; }
         for(int i=0;i<array.length-1;i++){
-            if(array[i]<=array[i+1]) return false;
+            if(array[i]<=array[i+1]) {
+                return false;
+            }
         }
         return true;
     }
@@ -91,6 +100,8 @@ public class FirstSteps {
     public void cube(int[] array){
         for(int i=0;i<array.length;i++){
             array[i] *= array[i]*array[i];
+            // REVU *=
+            
         }
     }
 
@@ -117,22 +128,24 @@ public class FirstSteps {
         return true;
     }
 
-    public int sum(int[][] matrix){
-        int summ=0;
-        for(int[] array: matrix){
+    public int sum(int[][] matrix) {
+        int summ = 0;
+        for (int[] array : matrix) {
             summ += sum(array);
         }
         return summ;
     }
 
-    public int max(int[][] matrix){
-        int max=Integer.MIN_VALUE;
-        if(matrix.length==0) return max;
-        for(int[] array: matrix){
-            if(max(array) > max) max = max(array);
-        }
+    public int max(int[][] matrix) {
+        int max = Integer.MIN_VALUE;
+        if (matrix.length == 0) return max;
+        for (int[] array : matrix) {
+            if (max(array) > max) max = max(array);
+            }
         return max;
     }
+
+
 
 
     public int diagonalMax(int[][] matrix){
