@@ -1,8 +1,8 @@
 package net.thumbtack.school.winobjects.v2;
 
-import net.thumbtack.school.iface.Movable;
-import net.thumbtack.school.iface.v2.Signed;
-import net.thumbtack.school.iface.v2.Point;
+import net.thumbtack.school.iface.v2.Movable;
+import net.thumbtack.school.pictures.v2.Signed;
+import net.thumbtack.school.pictures.v2.Point;
 
 public class Icon implements Movable, Signed {
 

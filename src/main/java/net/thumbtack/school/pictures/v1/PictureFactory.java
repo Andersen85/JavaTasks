@@ -1,4 +1,4 @@
-package net.thumbtack.school.iface.v2;
+package net.thumbtack.school.pictures.v1;
 
 public class PictureFactory {
 

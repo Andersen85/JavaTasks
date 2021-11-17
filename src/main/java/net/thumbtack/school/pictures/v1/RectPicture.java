@@ -1,17 +1,16 @@
-package net.thumbtack.school.iface.v2;
+package net.thumbtack.school.pictures.v1;
 
-import net.thumbtack.school.iface.Movable;
-import net.thumbtack.school.iface.Resizable;
-import net.thumbtack.school.winobjects.v2.Desktop;
+import java.util.Objects;
 
-public class RectPicture extends Picture {
+public class RectPicture {
     private Point topLeft;
     private Point bottomRight;
+    private int format;
 
-    public RectPicture(Point topLeft, Point bottomRight, int format) {
-        super(format);
+    public RectPicture(Point topLeft, Point bottomRight, int format){
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
+        this.format = format;
     }
 
     public RectPicture(int xLeft, int yTop, int width, int height, int format){
@@ -34,6 +33,10 @@ public class RectPicture extends Picture {
         return new Point(bottomRight.getX(), bottomRight.getY());
     }
 
+    public int getFormat() {
+        return format;
+    }
+
     public void setTopLeft(Point topLeft) {
         this.topLeft = topLeft;
     }
@@ -50,7 +53,6 @@ public class RectPicture extends Picture {
         return Math.abs(getBottomRight().getY()-getTopLeft().getY()+1);
     }
 
-    @Override
     public void moveTo(int x, int y){
         int w = getWidth();
         int h = getHeight();
@@ -58,13 +60,10 @@ public class RectPicture extends Picture {
         setBottomRight(new Point(x+w-1,y+h-1));
     }
 
-    @Override
     public void moveTo(Point point){
-        moveTo(point.getX(), point.getY());
+        moveTo(point.getX(),point.getY());
     }
 
-
-    @Override
     public void moveRel(int dx, int dy){
         topLeft.setX(topLeft.getX()+dx);
         bottomRight.setX(bottomRight.getX()+dx);
@@ -72,7 +71,6 @@ public class RectPicture extends Picture {
         bottomRight.setY(bottomRight.getY()+dy);
     }
 
-    @Override
     public void resize(double ratio){
         double newWidth = getWidth()*ratio;
         double newHeight = getHeight()*ratio;
@@ -82,18 +80,16 @@ public class RectPicture extends Picture {
                 (getTopLeft().getY()+(int)newHeight-1));
     }
 
-    @Override
     public boolean isInside(int x, int y){
         return (x >= getTopLeft().getX() && y >= getTopLeft().getY() &&
                 x <= getBottomRight().getY() && y <= getBottomRight().getY());    }
 
-    @Override
     public boolean isInside(Point point){
         return isInside(point.getX(),point.getY());
     }
 
 
-    public boolean isIntersects(RectPicture rectPicture){
+    public boolean isIntersects(RectPicture rectPicture){  // Закончить
         int count=0;
         for(int i=0;i<rectPicture.getWidth();i++){
             for (int j=0;j<rectPicture.getHeight();j++){
@@ -111,26 +107,22 @@ public class RectPicture extends Picture {
     }
 
 
-    @Override
     public boolean isFullyVisibleOnDesktop(Desktop desktop){
-    return getTopLeft().isVisibleOnDesktop(desktop) && getBottomRight().isVisibleOnDesktop( desktop)  ;
+    return getTopLeft().isVisibleOnDesktop(desktop) && getBottomRight().isVisibleOnDesktop(desktop)  ;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         RectPicture that = (RectPicture) o;
-
-        if (getTopLeft() != null ? !getTopLeft().equals(that.getTopLeft()) : that.getTopLeft() != null) return false;
-        return getBottomRight() != null ? getBottomRight().equals(that.getBottomRight()) : that.getBottomRight() == null;
+        return format == that.format && Objects.equals(topLeft, that.topLeft) && Objects.equals(bottomRight, that.bottomRight);
     }
 
     @Override
     public int hashCode() {
-        int result = getTopLeft() != null ? getTopLeft().hashCode() : 0;
-        result = 31 * result + (getBottomRight() != null ? getBottomRight().hashCode() : 0);
-        return result;
+        return Objects.hash(topLeft, bottomRight, format);
     }
+
+
 }

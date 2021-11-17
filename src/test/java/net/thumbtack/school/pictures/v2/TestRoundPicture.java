@@ -1,8 +1,7 @@
 package net.thumbtack.school.pictures.v2;
 
-import net.thumbtack.school.pictures.v2.Desktop;
-import net.thumbtack.school.pictures.v2.Point;
-import net.thumbtack.school.pictures.v2.RoundPicture;
+
+import net.thumbtack.school.winobjects.v2.Desktop;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -150,7 +149,7 @@ public class TestRoundPicture {
                 () -> assertFalse(new RoundPicture(539, 100, 101).isFullyVisibleOnDesktop(desktop)),
                 () -> assertTrue(new RoundPicture(539, 379, 100).isFullyVisibleOnDesktop(desktop)),
                 () -> assertFalse(new RoundPicture(539, 379, 101).isFullyVisibleOnDesktop(desktop)),
-               () -> assertTrue(new RoundPicture(100, 379, 100).isFullyVisibleOnDesktop(desktop)),
+                () -> assertTrue(new RoundPicture(100, 379, 100).isFullyVisibleOnDesktop(desktop)),
                 () -> assertFalse(new RoundPicture(100, 379, 101).isFullyVisibleOnDesktop(desktop))
         );
     }

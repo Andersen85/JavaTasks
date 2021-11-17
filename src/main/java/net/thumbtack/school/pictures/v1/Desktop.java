@@ -1,4 +1,4 @@
-package net.thumbtack.school.pictures.v2;
+package net.thumbtack.school.pictures.v1;
 
 import java.util.Objects;
 

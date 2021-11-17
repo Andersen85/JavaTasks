@@ -1,4 +1,4 @@
-package net.thumbtack.school.iface.v2;
+package net.thumbtack.school.pictures.v2;
 
 public interface Signed {
     String getSignature();

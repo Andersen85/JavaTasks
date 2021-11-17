@@ -1,6 +1,6 @@
 package net.thumbtack.school.winobjects.v2;
 
-import net.thumbtack.school.iface.v2.Point;
+import net.thumbtack.school.pictures.v2.Point;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertAll;

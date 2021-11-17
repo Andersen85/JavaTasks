@@ -1,8 +1,6 @@
 package net.thumbtack.school.pictures.v2;
 
-import net.thumbtack.school.pictures.v2.Desktop;
-import net.thumbtack.school.pictures.v2.Point;
-import net.thumbtack.school.pictures.v2.RectPicture;
+import net.thumbtack.school.winobjects.v2.Desktop;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -179,7 +177,7 @@ public class TestRectPicture {
                 () -> assertTrue(rectPicture.isInside(new Point(10, 30))),
                 () -> assertTrue(rectPicture.isInside(new Point(30, 30))),
                 () -> assertTrue(rectPicture.isInside(new Point(10, 59))),
-               // () -> assertFalse(rectPicture.isInside(new Point(10, 60))),
+                () -> assertFalse(rectPicture.isInside(new Point(10, 60))),
                 () -> assertFalse(rectPicture.isInside(new Point(0, 0))),
                 () -> assertFalse(rectPicture.isInside(new Point(10, 100))),
                 () -> assertFalse(rectPicture.isInside(new Point(-10, 20))),

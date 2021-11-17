@@ -1,7 +1,8 @@
 package net.thumbtack.school.types.v2;
 
-import net.thumbtack.school.iface.*;
-import net.thumbtack.school.iface.v2.*;
+import net.thumbtack.school.iface.v2.Movable;
+import net.thumbtack.school.iface.v2.Resizable;
+import net.thumbtack.school.pictures.v2.*;
 import net.thumbtack.school.winobjects.v2.Cursor;
 import net.thumbtack.school.winobjects.v2.Icon;
 import org.junit.jupiter.api.Test;

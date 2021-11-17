@@ -1,6 +1,8 @@
 package net.thumbtack.school.pictures.v2;
 
-public class SignedRectPicture extends RectPicture {
+import net.thumbtack.school.winobjects.v2.Desktop;
+
+public class SignedRectPicture extends RectPicture implements Signed {
 
 
     private String signature;
@@ -12,6 +14,7 @@ public class SignedRectPicture extends RectPicture {
         super(topLeft,bottomRight,format);
         this.signature = signature;
     }
+
     public SignedRectPicture(int xLeft, int yTop, int width, int height, int format, String signature) {
         //Создает SignedRectPicture по координатам левого верхнего угла, ширине, высоте, формату и подписи.
         this(new Point(xLeft,yTop), new Point(xLeft+width-1,yTop+height-1), format, signature);
@@ -39,6 +42,7 @@ public class SignedRectPicture extends RectPicture {
         return super.getFormat();
     }
 
+    @Override
     public String getSignature() {
         return signature;
     }
@@ -52,6 +56,7 @@ public class SignedRectPicture extends RectPicture {
     }
 
 
+    @Override
     public void setSignature(String signature) {
         this.signature = signature;
     }
@@ -66,16 +71,14 @@ public class SignedRectPicture extends RectPicture {
     return super.getHeight();
     }
 
+    @Override
     public void moveTo(int x, int y) {
         //Передвигает SignedRectPicture так, чтобы левый верхний угол его оказался в точке(x, y).
         super.moveTo(x,y);
     }
 
-    public void moveTo(Point point) {
-        //Передвигает SignedRectPicture так, чтобы левый верхний угол его оказался в точке point.
-        super.moveTo(point);
-    }
 
+    @Override
     public void moveRel(int dx, int dy) {
         //Передвигает SignedRectPicture на(dx, dy).
         super.moveRel(dx,dy);

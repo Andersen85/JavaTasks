@@ -1,8 +1,6 @@
 package net.thumbtack.school.pictures.v2;
 
-import net.thumbtack.school.pictures.v2.Desktop;
-import net.thumbtack.school.pictures.v2.Point;
-import net.thumbtack.school.pictures.v2.SignedRectPicture;
+import net.thumbtack.school.winobjects.v2.Desktop;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

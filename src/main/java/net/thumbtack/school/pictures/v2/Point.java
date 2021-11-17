@@ -1,5 +1,7 @@
 package net.thumbtack.school.pictures.v2;
 
+import net.thumbtack.school.winobjects.v2.Desktop;
+
 public class Point {
     private int x;
     private int y;

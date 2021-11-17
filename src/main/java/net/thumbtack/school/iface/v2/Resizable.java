@@ -1,4 +1,4 @@
-package net.thumbtack.school.iface;
+package net.thumbtack.school.iface.v2;
 
 public interface Resizable {
 

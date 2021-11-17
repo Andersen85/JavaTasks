@@ -10,23 +10,19 @@ public class FirstSteps {
     }
 
     public int div(int x, int y){
-        if(y==0) throw new NullPointerException("Y is null!");
         return x/y;
     }
 
     public int mod(int x, int y){
-        if(y==0) throw new NullPointerException("Y is null!");
         return x%y;
     }
 
     public boolean isEqual(int x,int y){
-        if(x==y) return true;
-        return false;
+        return x==y;
     }
 
     public boolean isGreater(int x,int y){
-        if(x<=y) return false;
-        return true;
+        return x>y;
     }
 
     public boolean isInsideRect(int xLeft, int yTop, int xRight, int yBottom, int x, int y){
@@ -72,16 +68,12 @@ public class FirstSteps {
     }
 
     public double average(int[] array){
+        if(array.length == 0) return 0.;
         double sum = 0;
-        int count = 0;
-        for (int i = 0; i < array.length; i++) {
-            sum += array[i];
-            count++;
+        for(int number: array){
+            sum += number;
         }
-        if (count == 0 || sum == 0) {
-            return 0;
-        }
-        return sum / count;
+        return sum/array.length;
     }
 
     public boolean isSortedDescendant(int[] array){
@@ -98,7 +90,7 @@ public class FirstSteps {
 
     public void cube(int[] array){
         for(int i=0;i<array.length;i++){
-            array[i]=array[i]*array[i]*array[i];
+            array[i] *= array[i]*array[i];
         }
     }
 
@@ -126,25 +118,18 @@ public class FirstSteps {
     }
 
     public int sum(int[][] matrix){
-        int sum=0;
-        for(int i=0;i<matrix.length;i++){
-            for (int j=0;j<matrix[i].length;j++){
-                sum+=matrix[i][j];
-            }
+        int summ=0;
+        for(int[] array: matrix){
+            summ += sum(array);
         }
-        return sum;
+        return summ;
     }
 
     public int max(int[][] matrix){
         int max=Integer.MIN_VALUE;
-        if(matrix.length==0) return 0;
-        for(int i=0;i<matrix.length;i++){
-            for (int j=0;j<matrix[i].length;j++){
-                if(matrix[i][j]>max) {
-                    max = matrix[i][j];
-                }
-
-            }
+        if(matrix.length==0) return max;
+        for(int[] array: matrix){
+            if(max(array) > max) max = max(array);
         }
         return max;
     }

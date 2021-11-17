@@ -6,11 +6,11 @@ import java.math.*;
 public class StringOperations {
 
     public static int getSummaryLength(String[] strings) {
-        int output = 0;
+        int sum = 0;
         for (String str : strings) {
-            output += str.length();
+            sum += str.length();
         }
-        return output;
+        return sum;
     }
 
     public static String getFirstAndLastLetterString(String string) {
@@ -104,29 +104,22 @@ public class StringOperations {
 
     public static String reverse(String string) {
         //Возвращает перевернутую строку.
-        char[] arr = string.toCharArray();
-        String resultString = "";
-        for (int i = arr.length - 1; i >= 0; i--) {
-            resultString += arr[i];
-        }
-        return resultString;
+        StringBuilder resultString = new StringBuilder(string);
+        return new String(resultString.reverse());
     }
 
     public static boolean isPalindrome(String string) {
         //Возвращает true, если строка является палиндромом, то есть читается слева направо так же, как и справа налево.
-        if(string == "") return true;
-        int half = 0;
-        if(string.length()%2 == 1) { half = (string.length()+1)/2;}
-        if(string.length()%2 != 1) { half = string.length()/2;}
-        String rev = reverse(string.substring(half,string.length()));
-        return isEqual(string.substring(0,half-1),rev);
+        for(int i=0;i<string.length()/2;i++){
+                if(string.charAt(i) != string.charAt(string.length()-i-1)) return false;
+        }
+        return true;
     }
 
     public static boolean isPalindromeIgnoreCase(String string) {
         //Возвращает true, если строка является палиндромом, то есть читается слева направо так же,
         // как и справа налево, без учета регистра.
-        string = string.toLowerCase();
-        return isPalindrome(string);
+        return isPalindrome(string.toLowerCase());
     }
 
     public static String getLongestPalindromeIgnoreCase(String[] strings) {
@@ -174,8 +167,7 @@ public class StringOperations {
     public static boolean isPalindromeAfterRemovingSpacesIgnoreCase(String string) {
         //Возвращает true, если строка после выбрасывания из нее всех пробелов является палиндромом, без учета регистра.
         string = string.replace(" ", "");
-        string = string.toLowerCase();
-        return isPalindrome(string);
+        return isPalindromeIgnoreCase(string);
     }
 
     public static boolean isEqualAfterTrimming(String string1, String string2) {
@@ -188,38 +180,40 @@ public class StringOperations {
     public static String makeCsvStringFromInts(int[] array) {
         //Для заданного массива целых чисел создает текстовую строку, в которой числа разделены знаком “запятая”
         // (т.н. формат CSV - comma separated values). Для пустого массива возвращается пустая строка.
-        String output = "";
-        for (int i=0;i<array.length;i++) {
-            if(i==array.length-1) output += array[i];
-            if(i!=array.length-1) output += array[i] + ",";
-        }
-        return output;
+        return new String(makeCsvStringBuilderFromInts(array));
     }
 
 
     public static String makeCsvStringFromDoubles(double[] array) {
         //Для заданного массива вещественных чисел создает текстовую строку, в которой числа разделены знаком “запятая”,
         // причем каждое число записывается с двумя знаками после точки. Для пустого массива возвращается пустая строка.
-        if (array==null) return "";
-        String output = "";
-        DecimalFormat f = new DecimalFormat("##.00");
-        for(int i=0;i<array.length;i++){
-            if(i==array.length-1) output += f.format(array[i]);
-            if(i!=array.length-1) output += f.format(array[i]) + ",";
-        }
-        return output;
+        return new String(makeCsvStringBuilderFromDoubles(array));
     }
 
 
     public static StringBuilder makeCsvStringBuilderFromInts(int[] array) {
         //То же, что и в упражнении 25, но возвращает StringBuilder.
-        return new StringBuilder(makeCsvStringFromInts(array));
+        StringBuilder output = new StringBuilder("");
+        if(array.length == 0) return output;
+        for (int i=0;i<array.length;i++) {
+            if(i==array.length-1) output.append(array[i]);
+            if(i!=array.length-1) output.append(array[i] + ",");
+        }
+        return output;
 
     }
 
     public static StringBuilder makeCsvStringBuilderFromDoubles(double[] array) {
         //То же, что и в упражнении 26, но возвращает StringBuilder.
-        return new StringBuilder(makeCsvStringFromDoubles(array));
+
+        StringBuilder output = new StringBuilder("");
+        if (array==null) return output;
+        DecimalFormat f = new DecimalFormat("##.00");
+        for(int i=0;i<array.length;i++){
+            if(i==array.length-1) output.append(f.format(array[i]));
+            if(i!=array.length-1) output.append(f.format(array[i]) + ",");
+        }
+        return output;
     }
 
     public static StringBuilder removeCharacters(String string, int[] positions) {
@@ -255,13 +249,5 @@ public class StringOperations {
         return string2.length();
     }
 
-    public static String method(String str) {
-        if (str.charAt(str.length()-1)=='x'){
-            str = str.replace(str.substring(str.length()-1), "");
-            return str;
-        } else{
-            return str;
-        }
-    }
 
 }

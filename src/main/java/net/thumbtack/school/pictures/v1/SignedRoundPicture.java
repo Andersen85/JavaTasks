@@ -1,8 +1,6 @@
-package net.thumbtack.school.iface.v2;
+package net.thumbtack.school.pictures.v1;
 
-import net.thumbtack.school.winobjects.v2.Desktop;
-
-public class SignedRoundPicture extends RoundPicture implements Signed {
+public class SignedRoundPicture extends RoundPicture {
 
     private String signature;
 
@@ -37,6 +35,10 @@ public class SignedRoundPicture extends RoundPicture implements Signed {
         return super.getRadius();
     }
 
+    public int getFormat() {
+        //Возвращает формат картинки
+        return super.getFormat();
+    }
 
     public String getSignature() {
         //Возвращает подпись
@@ -49,12 +51,15 @@ public class SignedRoundPicture extends RoundPicture implements Signed {
     }
 
 
-    @Override
     public void moveTo(int x, int y) {
         //Передвигает SignedRoundPicture так, чтобы центр его оказался в точке(x, y).
         super.moveTo(x,y);
     }
 
+    public void moveTo(Point point) {
+        //Передвигает SignedRoundPicture так, чтобы центр его оказался в точке point.
+        super.moveTo(point);
+    }
 
     public void setCenter(int x, int y) {
         //Устанавливает центр SignedRoundPicture.
@@ -71,7 +76,6 @@ public class SignedRoundPicture extends RoundPicture implements Signed {
         super.setFormat(format);
     }
 
-    @Override
     public void moveRel(int dx, int dy) {
         //Передвигает SignedRoundPicture на(dx, dy).
         super.moveRel(dx, dy);

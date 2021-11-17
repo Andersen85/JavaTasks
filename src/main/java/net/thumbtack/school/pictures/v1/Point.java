@@ -1,6 +1,4 @@
-package net.thumbtack.school.iface.v2;
-
-import net.thumbtack.school.winobjects.v2.Desktop;
+package net.thumbtack.school.pictures.v1;
 
 public class Point {
     private int x;
