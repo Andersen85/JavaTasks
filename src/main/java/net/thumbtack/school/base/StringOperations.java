@@ -6,6 +6,7 @@ import java.math.*;
 public class StringOperations {
 
     public static int getSummaryLength(String[] strings) {
+        // REVU int sum
         int output = 0;
         for (String str : strings) {
             output += str.length();
@@ -104,6 +105,7 @@ public class StringOperations {
 
     public static String reverse(String string) {
         //Возвращает перевернутую строку.
+        // REVU StringBuilder.reverse
         char[] arr = string.toCharArray();
         String resultString = "";
         for (int i = arr.length - 1; i >= 0; i--) {
@@ -115,9 +117,11 @@ public class StringOperations {
     public static boolean isPalindrome(String string) {
         //Возвращает true, если строка является палиндромом, то есть читается слева направо так же, как и справа налево.
         if(string == "") return true;
+        // REVU half = half = string.length()/2 всегда
         int half = 0;
         if(string.length()%2 == 1) { half = (string.length()+1)/2;}
         if(string.length()%2 != 1) { half = string.length()/2;}
+        // REVU сделайте без reverse
         String rev = reverse(string.substring(half,string.length()));
         return isEqual(string.substring(0,half-1),rev);
     }
@@ -188,8 +192,10 @@ public class StringOperations {
     public static String makeCsvStringFromInts(int[] array) {
         //Для заданного массива целых чисел создает текстовую строку, в которой числа разделены знаком “запятая”
         // (т.н. формат CSV - comma separated values). Для пустого массива возвращается пустая строка.
+        // REVU вызовите метод, возвращающий StringBuilder, и toString
         String output = "";
         for (int i=0;i<array.length;i++) {
+            // REVU += в цикле для строк - очень плохо
             if(i==array.length-1) output += array[i];
             if(i!=array.length-1) output += array[i] + ",";
         }
@@ -198,6 +204,7 @@ public class StringOperations {
 
 
     public static String makeCsvStringFromDoubles(double[] array) {
+        // REVU аналогично
         //Для заданного массива вещественных чисел создает текстовую строку, в которой числа разделены знаком “запятая”,
         // причем каждое число записывается с двумя знаками после точки. Для пустого массива возвращается пустая строка.
         if (array==null) return "";
@@ -213,12 +220,15 @@ public class StringOperations {
 
     public static StringBuilder makeCsvStringBuilderFromInts(int[] array) {
         //То же, что и в упражнении 25, но возвращает StringBuilder.
+        // REVU а вот здесь напишите код, который делает StringBuilder из массива
+        // используя его метод append
         return new StringBuilder(makeCsvStringFromInts(array));
 
     }
 
     public static StringBuilder makeCsvStringBuilderFromDoubles(double[] array) {
         //То же, что и в упражнении 26, но возвращает StringBuilder.
+        // REVU аналогично
         return new StringBuilder(makeCsvStringFromDoubles(array));
     }
 
@@ -255,6 +265,7 @@ public class StringOperations {
         return string2.length();
     }
 
+    // REVU не нужен
     public static String method(String str) {
         if (str.charAt(str.length()-1)=='x'){
             str = str.replace(str.substring(str.length()-1), "");

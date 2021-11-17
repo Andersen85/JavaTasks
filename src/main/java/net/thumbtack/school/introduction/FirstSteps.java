@@ -10,6 +10,10 @@ public class FirstSteps {
     }
 
     public int div(int x, int y){
+        // REVU это не требовалось, но если уж сделади - почему NullPointerException ?
+        // на это есть
+        // https://docs.oracle.com/javase/7/docs/api/java/lang/ArithmeticException.html
+        // здесь и далее
         if(y==0) throw new NullPointerException("Y is null!");
         return x/y;
     }
@@ -20,6 +24,8 @@ public class FirstSteps {
     }
 
     public boolean isEqual(int x,int y){
+        // return x == y;
+        // далее аналогично
         if(x==y) return true;
         return false;
     }
@@ -73,7 +79,9 @@ public class FirstSteps {
 
     public double average(int[] array){
         double sum = 0;
+        // REVU не нужна
         int count = 0;
+        // REVU вызовите sum
         for (int i = 0; i < array.length; i++) {
             sum += array[i];
             count++;
@@ -98,6 +106,7 @@ public class FirstSteps {
 
     public void cube(int[] array){
         for(int i=0;i<array.length;i++){
+            // REVU *=
             array[i]=array[i]*array[i]*array[i];
         }
     }
@@ -127,7 +136,9 @@ public class FirstSteps {
 
     public int sum(int[][] matrix){
         int sum=0;
+        // REVU for each
         for(int i=0;i<matrix.length;i++){
+            // REVU вызовите sum для линейного массива
             for (int j=0;j<matrix[i].length;j++){
                 sum+=matrix[i][j];
             }
@@ -138,6 +149,7 @@ public class FirstSteps {
     public int max(int[][] matrix){
         int max=Integer.MIN_VALUE;
         if(matrix.length==0) return 0;
+        // REVU аналогично
         for(int i=0;i<matrix.length;i++){
             for (int j=0;j<matrix[i].length;j++){
                 if(matrix[i][j]>max) {

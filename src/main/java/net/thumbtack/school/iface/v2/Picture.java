@@ -1,9 +1,11 @@
+// REVU удалите из этого пакета все классы. Тут должны быть только интерфейсы
 package net.thumbtack.school.iface.v2;
 
 import net.thumbtack.school.iface.Movable;
 import net.thumbtack.school.iface.Resizable;
 import net.thumbtack.school.winobjects.v2.Desktop;
 
+// этот класс должен быть в пакете net.thumbtack.school.pictures.v2
 public abstract class Picture implements Movable, Resizable {
 
     private int format;

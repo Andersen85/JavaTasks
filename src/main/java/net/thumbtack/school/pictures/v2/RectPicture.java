@@ -2,6 +2,7 @@ package net.thumbtack.school.pictures.v2;
 
 import java.util.Objects;
 
+// REVU где класс Picture ?
 public class RectPicture {
     private Point topLeft;
     private Point bottomRight;
