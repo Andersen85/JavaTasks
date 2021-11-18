@@ -57,13 +57,6 @@ public class RectPicture extends Picture {
         setBottomRight(new Point(x+w-1,y+h-1));
     }
 
-    @Override
-    // REVU а этот метод должен быть в Picture
-    // во всех остальных классах его переопределять не надо
-    public void moveTo(Point point){
-        moveTo(point.getX(), point.getY());
-    }
-
 
     @Override
     public void moveRel(int dx, int dy){

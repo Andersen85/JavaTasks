@@ -1,4 +1,4 @@
-package net.thumbtack.school.pictures.v2;
+package net.thumbtack.school.pictures.v2.iface;
 
 // REVU в пакет net.thumbtack.school.pictures.v2.iface его
 public interface Signed {

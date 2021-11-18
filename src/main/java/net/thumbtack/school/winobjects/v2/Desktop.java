@@ -13,8 +13,7 @@ public class Desktop {
 
     public Desktop(){
         // REVU this(640,480);
-        width=640;
-        height=480;
+        this(640,480);
     }
 
     public int getWidth() {

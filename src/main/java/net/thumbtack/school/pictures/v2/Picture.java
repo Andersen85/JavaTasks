@@ -23,9 +23,4 @@ public abstract class Picture implements Movable, Resizable {
     public abstract boolean isInside(int x, int y);
     public abstract boolean isInside(Point point);
     public abstract boolean isFullyVisibleOnDesktop(Desktop desktop);
-    // REVU не нужно, есть в Movable
-    public abstract void moveTo(int x,int y);
-
-
-
 }

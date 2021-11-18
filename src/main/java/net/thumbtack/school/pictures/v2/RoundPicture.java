@@ -38,12 +38,11 @@ public class RoundPicture extends Picture  {
     @Override
     // REVU а этот метод должен быть в Picture
     // во всех остальных классах его переопределять не надо
+    // (- Но ведь в Picture этот метод абстрактный, т.к. у разных картинок отличается его реализация)
     public void moveTo(int x, int y){
         center.setX(x);
         center.setY(y);
     }
-
-
 
     public void setCenter(Point center) {
         this.center = center;

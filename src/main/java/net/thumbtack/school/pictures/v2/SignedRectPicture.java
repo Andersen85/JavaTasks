@@ -1,5 +1,6 @@
 package net.thumbtack.school.pictures.v2;
 
+import net.thumbtack.school.pictures.v2.iface.Signed;
 import net.thumbtack.school.winobjects.v2.Desktop;
 
 public class SignedRectPicture extends RectPicture implements Signed {
@@ -30,94 +31,14 @@ public class SignedRectPicture extends RectPicture implements Signed {
         this( xLeft, yTop, width, height, 1, signature);
     }
 
-    public Point getTopLeft() {
-        return super.getTopLeft();
-    }
-
-    public Point getBottomRight() {
-        return super.getBottomRight();
-    }
-
-    public int getFormat() {
-        return super.getFormat();
-    }
-
     @Override
     public String getSignature() {
         return signature;
     }
 
-    public void setTopLeft(Point topLeft) {
-        super.setTopLeft(topLeft);
-    }
-
-    public void setBottomRight(Point bottomRight) {
-        super.setBottomRight(bottomRight);
-    }
-
-
     @Override
     public void setSignature(String signature) {
         this.signature = signature;
-    }
-
-    // REVU Если метод у потомка только вызывает тот же метод родителя и ничего больше не делает, то его переопределять не надо. Удалите все такие методы
-    // во всех классах
-    public int getWidth() {
-        //Возвращает ширину SignedRectPicture.
-        return super.getWidth();
-    }
-
-    public int getHeight() {
-        //Возвращает высоту SignedRectPicture.*/
-    return super.getHeight();
-    }
-
-    @Override
-    public void moveTo(int x, int y) {
-        //Передвигает SignedRectPicture так, чтобы левый верхний угол его оказался в точке(x, y).
-        super.moveTo(x,y);
-    }
-
-
-    @Override
-    public void moveRel(int dx, int dy) {
-        //Передвигает SignedRectPicture на(dx, dy).
-        super.moveRel(dx,dy);
-    }
-
-    public void resize(double ratio) {
-        //Изменяет ширину и длину SignedRectPicture в ratio раз при сохранении координат левой верхней точки.Дробная часть
-        //вычисленной длины или ширины отбрасывается.Если при таком изменении длина или ширина какой -то из сторон
-        //окажется меньше 1, то она принимается равной 1.
-        super.resize(ratio);
-    }
-    public boolean isInside(int x, int y) {
-        //Определяет, лежит ли точка (x, y)внутри SignedRectPicture.Если точка лежит на стороне, считается, что она лежит
-        //внутри.
-        return super.isInside(x,y);
-    }
-
-    public boolean isInside(Point point) {
-       // Определяет, лежит ли точка point внутри SignedRectPicture.Если точка лежит на стороне, считается, что она лежит
-        //внутри.
-        return super.isInside(point);
-    }
-
-    public boolean isIntersects(SignedRectPicture SignedRectPicture) {
-        //Определяет, пересекается ли SignedRectPicture с другим SignedRectPicture.Считается, что
-        //картинки пересекаются, если у них есть хоть одна общая точка.
-        return super.isIntersects(SignedRectPicture);
-    }
-
-    public boolean isInside(SignedRectPicture SignedRectPicture) {
-        //Определяет, лежит ли SignedRectPicture целиком внутри текущего SignedRectPicture.
-        return super.isInside(SignedRectPicture);
-    }
-
-    public boolean isFullyVisibleOnDesktop(Desktop desktop) {
-        //Определяет, верно ли, что вся SignedRectPicture находится в пределах Desktop.
-     return super.isFullyVisibleOnDesktop(desktop);
     }
 
     @Override

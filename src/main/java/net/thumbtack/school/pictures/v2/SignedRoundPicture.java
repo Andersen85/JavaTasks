@@ -1,5 +1,6 @@
 package net.thumbtack.school.pictures.v2;
 
+import net.thumbtack.school.pictures.v2.iface.Signed;
 import net.thumbtack.school.winobjects.v2.Desktop;
 
 public class SignedRoundPicture extends RoundPicture implements Signed {
@@ -27,80 +28,18 @@ public class SignedRoundPicture extends RoundPicture implements Signed {
         this( xCenter,yCenter, radius, 1, signature);
     }
 
-    public Point getCenter() {
-        //Возвращает центр SignedRoundPicture.
-       return super.getCenter();
-    }
-
-    public int getRadius(){
-        //Возвращает радиус SignedRoundPicture.
-        return super.getRadius();
-    }
-
-
+    @Override
     public String getSignature() {
         //Возвращает подпись
         return signature;
     }
 
+    @Override
     public void setSignature(String signature) {
         //Устанавливает новую подпись
         this.signature = signature;
     }
 
-
-    @Override
-    public void moveTo(int x, int y) {
-        //Передвигает SignedRoundPicture так, чтобы центр его оказался в точке(x, y).
-        super.moveTo(x,y);
-    }
-
-
-    public void setCenter(int x, int y) {
-        //Устанавливает центр SignedRoundPicture.
-        super.setCenter(new Point(x,y));
-    }
-
-    public void setRadius(int radius) {
-        //Устанавливает радиус SignedRoundPicture.
-        super.setRadius(radius);
-    }
-
-    public void setActive(int format) {
-        //Устанавливает состояние активности SignedRoundPicture.
-        super.setFormat(format);
-    }
-
-    @Override
-    public void moveRel(int dx, int dy) {
-        //Передвигает SignedRoundPicture на(dx, dy).
-        super.moveRel(dx, dy);
-    }
-
-    public void resize(double ratio) {
-        //Изменяет радиус SignedRoundPicture в ratio раз, не изменяя центра.Дробная часть вычисленного таким
-        //образом радиуса отбрасывается.Если вычисленный радиус окажется меньше 1, то он принимается равным 1.
-        super.resize(ratio);
-    }
-
-    public boolean isInside(int x, int y) {
-        //Определяет, лежит ли точка (x, y)внутри SignedRoundPicture.Если точка лежит на окружности, считается, что
-        //она лежит внутри.В этом методе мы пренебрегаем пиксельной структурой изображения и рассматриваем
-        //SignedRoundPicture как математический круг.
-        return super.isInside(x,y);
-    }
-
-    public boolean isInside(Point point) {
-        //Определяет, лежит ли точка point внутри SignedRoundPicture.Если точка лежит на окружности, считается, что
-        //она лежит внутри.В этом методе мы пренебрегаем пиксельной структурой изображения и рассматриваем
-        //SignedRoundPicture как математический круг.
-        return super.isInside(point);
-    }
-
-    public boolean isFullyVisibleOnDesktop(Desktop desktop) {
-        //Определяет, верно ли, что вся SignedRoundPicture находится в пределах Desktop.
-        return super.isFullyVisibleOnDesktop(desktop);
-    }
 
     @Override
     public boolean equals(Object o) {

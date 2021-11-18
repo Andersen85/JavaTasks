@@ -101,7 +101,7 @@ public class FirstSteps {
         for(int i=0;i<array.length;i++){
             array[i] *= array[i]*array[i];
             // REVU *=
-            
+
         }
     }
 
