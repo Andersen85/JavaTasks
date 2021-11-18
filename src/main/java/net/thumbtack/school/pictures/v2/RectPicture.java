@@ -4,7 +4,6 @@ import net.thumbtack.school.winobjects.v2.Desktop;
 
 
 public class RectPicture extends Picture {
-// REVU где класс Picture ?
     private Point topLeft;
     private Point bottomRight;
 
@@ -59,6 +58,8 @@ public class RectPicture extends Picture {
     }
 
     @Override
+    // REVU а этот метод должен быть в Picture
+    // во всех остальных классах его переопределять не надо
     public void moveTo(Point point){
         moveTo(point.getX(), point.getY());
     }

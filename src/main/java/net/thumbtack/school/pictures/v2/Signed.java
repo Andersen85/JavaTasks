@@ -1,5 +1,6 @@
 package net.thumbtack.school.pictures.v2;
 
+// REVU в пакет net.thumbtack.school.pictures.v2.iface его
 public interface Signed {
     String getSignature();
     //Возвращает подпись

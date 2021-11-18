@@ -61,6 +61,8 @@ public class SignedRectPicture extends RectPicture implements Signed {
         this.signature = signature;
     }
 
+    // REVU Если метод у потомка только вызывает тот же метод родителя и ничего больше не делает, то его переопределять не надо. Удалите все такие методы
+    // во всех классах
     public int getWidth() {
         //Возвращает ширину SignedRectPicture.
         return super.getWidth();

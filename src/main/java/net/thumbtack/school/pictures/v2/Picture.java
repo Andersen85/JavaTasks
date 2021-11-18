@@ -4,7 +4,6 @@ import net.thumbtack.school.iface.v2.Movable;
 import net.thumbtack.school.iface.v2.Resizable;
 import net.thumbtack.school.winobjects.v2.Desktop;
 
-// этот класс должен быть в пакете net.thumbtack.school.pictures.v2
 public abstract class Picture implements Movable, Resizable {
 
     private int format;
@@ -24,6 +23,7 @@ public abstract class Picture implements Movable, Resizable {
     public abstract boolean isInside(int x, int y);
     public abstract boolean isInside(Point point);
     public abstract boolean isFullyVisibleOnDesktop(Desktop desktop);
+    // REVU не нужно, есть в Movable
     public abstract void moveTo(int x,int y);
 
 
