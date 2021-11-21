@@ -293,7 +293,9 @@ public class TestManagers {
  	@Test
 	public void testMustNotBeCompiled() {
 		Manager<String> stringManager = new Manager<String>("My String");
-	}*/
+	}
+
+     */
 
 }
 
