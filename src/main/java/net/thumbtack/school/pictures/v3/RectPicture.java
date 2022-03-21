@@ -1,8 +1,6 @@
 package net.thumbtack.school.pictures.v3;
 
 import net.thumbtack.school.exceptions.v3.GraphicException;
-import net.thumbtack.school.pictures.v3.Picture;
-import net.thumbtack.school.pictures.v3.Point;
 import net.thumbtack.school.winobjects.v3.Desktop;
 
 
@@ -138,4 +136,5 @@ public class RectPicture extends Picture {
         result = 31 * result + (getBottomRight() != null ? getBottomRight().hashCode() : 0);
         return result;
     }
+
 }
