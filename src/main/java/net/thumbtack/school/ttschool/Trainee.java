@@ -66,6 +66,7 @@ public class Trainee implements Serializable {
         return firstName+" "+lastName;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -86,4 +87,6 @@ public class Trainee implements Serializable {
         result = 31 * result + getRating();
         return result;
     }
+
+
 }
