@@ -10,7 +10,10 @@ public class School {
     private Set<Group> groups;
 
     public School(String name, int year) throws TrainingException {
+        // REVU вызовите сеттеры, не дублируйте код
         if(name == null || name.equals("")) throw new TrainingException(TrainingErrorCode.SCHOOL_WRONG_NAME);
+        // где-то в Задании есть требование насчет 2020 - 2022 ?
+        // Ваша программа же в следующем году работать перестанет :-)
         if(year > 2022 || year < 2000) throw new TrainingException(TrainingErrorCode.SCHOOL_WRONG_YEAR);
         this.name = name;
         this.year = year;
@@ -42,6 +45,7 @@ public class School {
     public void  addGroup(Group group) throws TrainingException {
         //Добавляет Group в школу.Если группа с таким именем уже есть, выбрасывает TrainingException с
         //TrainingErrorCode.DUPLICATE_GROUP_NAME
+        // REVU Линейный проход для добавления - это плохо, медленно. Подумайте, как сделать, чтобы при формировании Set использовалось только name. Подсказка - кроме HashSet, есть и другой
         for (Group g : groups) {
             if (g.getName().equals(group.getName())) throw new TrainingException(TrainingErrorCode.DUPLICATE_GROUP_NAME);
         }
@@ -51,6 +55,7 @@ public class School {
     public void  removeGroup(Group group) throws TrainingException {
         //Удаляет Group из школы.Если такой Group в школе нет, выбрасывает TrainingException с
         //TrainingErrorCode.GROUP_NOT_FOUND
+        // REVU та же проблема, то же лечение
         if(!groups.contains(group)) throw new TrainingException(TrainingErrorCode.GROUP_NOT_FOUND);
         groups.remove(group);
     }
@@ -58,6 +63,7 @@ public class School {
     public void  removeGroup(String name) throws TrainingException {
         //Удаляет Group с данным названием из школы.Если группа с таким названием не найдена, выбрасывает
         //TrainingException с TrainingErrorCode.GROUP_NOT_FOUND
+        // REVU можно просто for(Group group : groups)
         Iterator<Group> iterator = groups.iterator();
         while (iterator.hasNext()){
             if(iterator.next().getName().equals(name)) {

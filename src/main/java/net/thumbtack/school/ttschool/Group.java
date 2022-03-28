@@ -5,9 +5,11 @@ import java.util.*;
 public class Group {
     private String name;
     private String room;
+    // REVU trainees. Имена начинаются со строчной буквы
     private List<Trainee> Trainees;
 
     public Group(String name, String classroom) throws TrainingException {
+        // REVU вызовите сеттеры, не дублируйте код
         if (name == null || name.equals("")) throw new TrainingException(TrainingErrorCode.GROUP_WRONG_NAME);
         if (classroom == null || classroom.equals(""))
             throw new TrainingException(TrainingErrorCode.GROUP_WRONG_ROOM);
@@ -84,6 +86,7 @@ public class Group {
     }
 
     public void sortTraineeListByFirstNameAscendant() {
+        // REVU Collections.sort
         //Сортирует список Trainee группы, упорядочивая его по возрастанию имени Trainee.
         SortedSet<Trainee> set = new TreeSet<Trainee>((p1,p2) -> p1.getFirstName().compareTo(p2.getFirstName()));
         set.addAll(Trainees);
@@ -92,6 +95,7 @@ public class Group {
     }
 
     public void sortTraineeListByRatingDescendant() {
+        // REVU Collections.sort
         //Сортирует список Trainee группы, упорядочивая его по убыванию оценки Trainee.
         SortedSet<Trainee> set = new TreeSet<Trainee>(new Comparator<Trainee>() {
             @Override
@@ -125,6 +129,7 @@ public class Group {
         //с оценкой 5, возвращает список получивших оценку 5, если же таких нет, но есть Trainee с оценкой 4, возвращает
         //список получивших оценку 4 и т.д.Для пустого списка выбрасывает TrainingException с
         //TrainingErrorCode.TRAINEE_NOT_FOUND.Желательно сделать этот метод без сортировки и в один проход по списку.
+        // REVU а без нахождения maxRating сможете ?
         int maxRating = 0;
         List<Trainee> list = new ArrayList<>();
         for (Trainee trainee : Trainees) {
@@ -142,6 +147,9 @@ public class Group {
     }
 
     public boolean hasDuplicates() {
+        // Вы на ровном месте устроили фактически двойной цикл, так как indexOf - это проход
+        // REVU проще.
+        // Кто у нас дубликаты не любит ?
         //Проверяет, есть ли в группе хотя бы одна пара Trainee, для которых совпадают имя, фамилия и оценка.
         for (Trainee trainee : Trainees) {
             if (Trainees.indexOf(trainee) != Trainees.lastIndexOf(trainee))

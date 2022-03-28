@@ -34,6 +34,8 @@ public class PairManager<T extends Picture, S extends Picture> {
         this.secondPicture = secondPicture;
     }
 
+    // REVU нет, метод не должен быть шаблонным
+    // обычный метод, только параметр типа PairManager<? extends...>
     public   <K extends Picture, F extends Picture> boolean allPicturesFullyVisibleOnDesktop(PairManager<K,F> pairManager,
                                                                                            Desktop desktop){
         //проверяющий, верно ли, что одновременно находятся на Desktop все картинки данного PairManager
@@ -45,6 +47,7 @@ public class PairManager<T extends Picture, S extends Picture> {
 
 
 
+    // REVU то же
     public static  <K extends Picture, F extends Picture> boolean  allPicturesFullyVisibleOnDesktop(PairManager<K,F> pairManager1,
                                                                        PairManager<K,F> pairManager2,
                                                     Desktop desktop) throws GraphicException{

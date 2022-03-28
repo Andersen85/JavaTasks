@@ -40,6 +40,8 @@ public class ArrayManager<T extends Picture> {
         }
     }
 
+    // REVU нет, метод не должен быть шаблонным
+    // обычный метод, только параметр типа ArrayManager<? extends...>
     public <K extends Picture> boolean isSameSize(ArrayManager<K> arrayManager){
         return arrayManager.getPictures().length == pictures.length;
     }

@@ -11,6 +11,7 @@ public class Trainee implements Serializable {
     public Trainee(String firstName, String lastName, int rating) throws TrainingException {
         //Создает Trainee с указанными значениями полей.Для недопустимых значений входных параметров выбрасывает
         //TrainingException с соответствующим TrainingErrorCode
+        // REVU вызовите сеттеры, не дублируйте код
         if(firstName==null||firstName.equals("")){
             throw new TrainingException(TrainingErrorCode.TRAINEE_WRONG_FIRSTNAME);
         }
