@@ -3,9 +3,8 @@ package net.thumbtack.school.pictures.managers;
 import net.thumbtack.school.exceptions.v3.GraphicErrorCode;
 import net.thumbtack.school.exceptions.v3.GraphicException;
 import net.thumbtack.school.pictures.v3.Picture;
-import net.thumbtack.school.pictures.v3.Point;
-import net.thumbtack.school.winobjects.v3.Desktop;
 import net.thumbtack.school.winobjects.v3.Cursor;
+import net.thumbtack.school.winobjects.v3.Desktop;
 
 public class ArrayManager<T extends Picture> {
 
@@ -42,7 +41,7 @@ public class ArrayManager<T extends Picture> {
 
     // REVU нет, метод не должен быть шаблонным
     // обычный метод, только параметр типа ArrayManager<? extends...>
-    public <K extends Picture> boolean isSameSize(ArrayManager<K> arrayManager){
+    public  boolean isSameSize(ArrayManager<? extends Picture> arrayManager){
         return arrayManager.getPictures().length == pictures.length;
     }
 

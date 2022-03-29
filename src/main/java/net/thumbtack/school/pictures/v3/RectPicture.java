@@ -90,11 +90,6 @@ public class RectPicture extends Picture {
         return (x >= getTopLeft().getX() && y >= getTopLeft().getY() &&
                 x <= getBottomRight().getY() && y <= getBottomRight().getY());    }
 
-    @Override
-    public boolean isInside(Point point){
-        return isInside(point.getX(),point.getY());
-    }
-
 
     public boolean isIntersects(RectPicture rectPicture){
         int count=0;

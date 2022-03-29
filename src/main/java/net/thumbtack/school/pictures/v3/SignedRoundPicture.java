@@ -12,10 +12,10 @@ public class SignedRoundPicture extends RoundPicture implements Signed {
         //Создает SignedRoundPicture по координатам центра, значению радиуса, формату и подписи.
         super(center,radius, format);
         // REVU сначала проверка, потом присваивание
-        this.signature = signature;
         if(signature == null) {
             throw new GraphicException(GraphicErrorCode.NULL_SIGNATURE);
         }
+        this.signature = signature;
     }
 
     public SignedRoundPicture(Point center, int radius, String format, String signature) throws GraphicException {

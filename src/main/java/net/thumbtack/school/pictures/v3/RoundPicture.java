@@ -1,8 +1,6 @@
 package net.thumbtack.school.pictures.v3;
 
 import net.thumbtack.school.exceptions.v3.GraphicException;
-import net.thumbtack.school.pictures.v3.Picture;
-import net.thumbtack.school.pictures.v3.Point;
 import net.thumbtack.school.winobjects.v3.Desktop;
 
 public class RoundPicture extends Picture {
@@ -83,15 +81,6 @@ public class RoundPicture extends Picture {
         double yCenter = (double) center.getY();
         double xPoint = (double) x;
         double yPoint = (double) y;
-        return Math.sqrt(Math.pow(xCenter-xPoint,2)+Math.pow(yCenter-yPoint,2)) <= radius;
-    }
-
-    @Override
-    public boolean isInside(Point point){
-        double xCenter = (double) center.getX();
-        double yCenter = (double) center.getY();
-        double xPoint = (double) point.getX();
-        double yPoint = (double) point.getY();
         return Math.sqrt(Math.pow(xCenter-xPoint,2)+Math.pow(yCenter-yPoint,2)) <= radius;
     }
 

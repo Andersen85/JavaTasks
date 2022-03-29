@@ -15,7 +15,7 @@ public class MatrixNonSimilarRows {
         //Возвращает список непохожих строк.
         Map<Set<Integer>, int[]> map = new HashMap<>();
         for (int[] array : matrix) {
-            Set<Integer> set = new TreeSet<>(Comparator.comparing(Integer::intValue));
+            Set<Integer> set = new HashSet<>();
             for (int num : array) {
                 set.add(num);
             }

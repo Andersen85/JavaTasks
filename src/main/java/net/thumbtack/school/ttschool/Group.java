@@ -6,16 +6,13 @@ public class Group {
     private String name;
     private String room;
     // REVU trainees. Имена начинаются со строчной буквы
-    private List<Trainee> Trainees;
+    private List<Trainee> trainees;
 
     public Group(String name, String classroom) throws TrainingException {
         // REVU вызовите сеттеры, не дублируйте код
-        if (name == null || name.equals("")) throw new TrainingException(TrainingErrorCode.GROUP_WRONG_NAME);
-        if (classroom == null || classroom.equals(""))
-            throw new TrainingException(TrainingErrorCode.GROUP_WRONG_ROOM);
-        this.name = name;
-        this.room = classroom;
-        Trainees = new ArrayList<>();
+        setName(name);
+        setRoom(classroom);
+        trainees = new ArrayList<>();
     }
 
     public String getName() {
@@ -38,84 +35,75 @@ public class Group {
     }
 
     public List<Trainee> getTrainees() {
-        return Trainees;
+        return trainees;
     }
 
     public void addTrainee(Trainee trainee) {
         //Добавляет Trainee в группу.
-        Trainees.add(trainee);
+        trainees.add(trainee);
     }
 
     public void removeTrainee(Trainee trainee) throws TrainingException {
         //Удаляет Trainee из группы. Если такого Trainee в группе нет, выбрасывает TrainingException
         // с TrainingErrorCode.TRAINEE_NOT_FOUND
-        if (!Trainees.contains(trainee)) throw new TrainingException(TrainingErrorCode.TRAINEE_NOT_FOUND);
-        Trainees.remove(trainee);
+        if (!trainees.contains(trainee)) throw new TrainingException(TrainingErrorCode.TRAINEE_NOT_FOUND);
+        trainees.remove(trainee);
     }
 
     public void removeTrainee(int index) throws TrainingException {
         //Удаляет Trainee с данным номером в списке из группы.Если номер не является допустимым, выбрасывает
         //TrainingException с TrainingErrorCode.TRAINEE_NOT_FOUND
-        if (index < 0 || index > Trainees.size() - 1) throw new
+        if (index < 0 || index > trainees.size() - 1) throw new
                 TrainingException(TrainingErrorCode.TRAINEE_NOT_FOUND);
-        Trainees.remove(index);
+        trainees.remove(index);
     }
 
     public Trainee getTraineeByFirstName(String firstName) throws TrainingException {
         //Возвращает первый найденный в списке группы Trainee, у которого имя равно firstName.Если такого Trainee в
         //группе нет, выбрасывает TrainingException с TrainingErrorCode.TRAINEE_NOT_FOUND
-        for (Trainee trainee : Trainees) {
+        for (Trainee trainee : trainees) {
             if (trainee.getFirstName().equals(firstName)) {
                 return trainee;
             }
         }
-        //?   + мб итератором будет проще
         throw new TrainingException(TrainingErrorCode.TRAINEE_NOT_FOUND);
     }
 
     public Trainee getTraineeByFullName(String fullName) throws TrainingException {
         //Возвращает первый найденный в списке группы Trainee, у которого полное имя равно fullName.Если такого Trainee в
         //группе нет, выбрасывает TrainingException с TrainingErrorCode.TRAINEE_NOT_FOUND
-        for (Trainee trainee : Trainees) {
+        for (Trainee trainee : trainees) {
             if (trainee.getFullName().equals(fullName)) {
                 return trainee;
             }
         }
-        //?
         throw new TrainingException(TrainingErrorCode.TRAINEE_NOT_FOUND);
     }
 
     public void sortTraineeListByFirstNameAscendant() {
         // REVU Collections.sort
         //Сортирует список Trainee группы, упорядочивая его по возрастанию имени Trainee.
-        SortedSet<Trainee> set = new TreeSet<Trainee>((p1,p2) -> p1.getFirstName().compareTo(p2.getFirstName()));
-        set.addAll(Trainees);
-        Trainees.clear();
-        Trainees.addAll(set);
+
+        Collections.sort(trainees);
+
     }
 
     public void sortTraineeListByRatingDescendant() {
         // REVU Collections.sort
         //Сортирует список Trainee группы, упорядочивая его по убыванию оценки Trainee.
-        SortedSet<Trainee> set = new TreeSet<Trainee>(new Comparator<Trainee>() {
+        Comparator<Trainee> comparator = new Comparator<>() {
             @Override
             public int compare(Trainee t1, Trainee t2) {
-                if(t1.getRating() == t2.getRating()){
-                    return 0;
-                } else if(t1.getRating() > t2.getRating()){
-                    return -1;
-                } else return 1;
+                return Integer.compare(t2.getRating(), t1.getRating());
             }
-        });
-        set.addAll(Trainees);
-        Trainees.clear();
-        Trainees.addAll(set);
+        };
+        trainees.sort(comparator);
     }
 
     public void reverseTraineeList() {
         //Переворачивает список Trainee группы, то есть последний элемент списка становится начальным, предпоследний
         //-следующим за начальным и т.д..
-        Collections.reverse(Trainees);
+        Collections.reverse(trainees);
     }
 
     public void rotateTraineeList(int positions) {
@@ -130,19 +118,15 @@ public class Group {
         //список получивших оценку 4 и т.д.Для пустого списка выбрасывает TrainingException с
         //TrainingErrorCode.TRAINEE_NOT_FOUND.Желательно сделать этот метод без сортировки и в один проход по списку.
         // REVU а без нахождения maxRating сможете ?
-        int maxRating = 0;
+        if(trainees.isEmpty()) throw new TrainingException(TrainingErrorCode.TRAINEE_NOT_FOUND);
+        sortTraineeListByRatingDescendant();
         List<Trainee> list = new ArrayList<>();
-        for (Trainee trainee : Trainees) {
-            if (trainee.getRating() > maxRating) {
-                maxRating = trainee.getRating();
-            }
+        int maxRating = trainees.get(0).getRating();
+        int i = 0;
+        while (maxRating == trainees.get(i).getRating()){
+            list.add(trainees.get(i));
+            i++;
         }
-        for (Trainee trainee : Trainees) {
-            if (trainee.getRating() == maxRating) {
-                list.add(trainee);
-            }
-        }
-        if (list.isEmpty()) throw new TrainingException(TrainingErrorCode.TRAINEE_NOT_FOUND);
         return list;
     }
 
@@ -151,11 +135,8 @@ public class Group {
         // REVU проще.
         // Кто у нас дубликаты не любит ?
         //Проверяет, есть ли в группе хотя бы одна пара Trainee, для которых совпадают имя, фамилия и оценка.
-        for (Trainee trainee : Trainees) {
-            if (Trainees.indexOf(trainee) != Trainees.lastIndexOf(trainee))
-                return true;
-        }
-        return false;
+        Set<Trainee> set = new HashSet<>(trainees);
+        return trainees.size() != set.size();
     }
 
     @Override

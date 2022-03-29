@@ -1,7 +1,6 @@
 package net.thumbtack.school.ttschool;
 
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class School {
@@ -11,13 +10,13 @@ public class School {
 
     public School(String name, int year) throws TrainingException {
         // REVU вызовите сеттеры, не дублируйте код
-        if(name == null || name.equals("")) throw new TrainingException(TrainingErrorCode.SCHOOL_WRONG_NAME);
+        setName(name);
         // где-то в Задании есть требование насчет 2020 - 2022 ?
         // Ваша программа же в следующем году работать перестанет :-)
-        if(year > 2022 || year < 2000) throw new TrainingException(TrainingErrorCode.SCHOOL_WRONG_YEAR);
+        setYear(year);
         this.name = name;
         this.year = year;
-        groups = new HashSet<>();
+        groups = new LinkedHashSet<>();
     }
 
     public String getName() {
@@ -25,7 +24,7 @@ public class School {
     }
 
     public void setName(String name) throws TrainingException {
-        if(name == null || name.equals("")) throw new TrainingException(TrainingErrorCode.SCHOOL_WRONG_NAME);
+        if (name == null || name.equals("")) throw new TrainingException(TrainingErrorCode.SCHOOL_WRONG_NAME);
         this.name = name;
     }
 
@@ -34,7 +33,6 @@ public class School {
     }
 
     public void setYear(int year) throws TrainingException {
-        if(year > 2022 || year < 2000) throw new TrainingException(TrainingErrorCode.SCHOOL_WRONG_YEAR);
         this.year = year;
     }
 
@@ -42,40 +40,39 @@ public class School {
         return groups;
     }
 
-    public void  addGroup(Group group) throws TrainingException {
+    public void addGroup(Group group) throws TrainingException {
         //Добавляет Group в школу.Если группа с таким именем уже есть, выбрасывает TrainingException с
         //TrainingErrorCode.DUPLICATE_GROUP_NAME
-        // REVU Линейный проход для добавления - это плохо, медленно. Подумайте, как сделать, чтобы при формировании Set использовалось только name. Подсказка - кроме HashSet, есть и другой
+        // REVU Линейный проход для добавления - это плохо, медленно. Подумайте, как сделать, чтобы при формировании
+        // Set использовалось только name. Подсказка - кроме HashSet, есть и другой
         for (Group g : groups) {
-            if (g.getName().equals(group.getName())) throw new TrainingException(TrainingErrorCode.DUPLICATE_GROUP_NAME);
+            if (g.getName().equals(group.getName()))
+                throw new TrainingException(TrainingErrorCode.DUPLICATE_GROUP_NAME);
         }
         groups.add(group);
     }
 
-    public void  removeGroup(Group group) throws TrainingException {
+    public void removeGroup(Group group) throws TrainingException {
         //Удаляет Group из школы.Если такой Group в школе нет, выбрасывает TrainingException с
         //TrainingErrorCode.GROUP_NOT_FOUND
         // REVU та же проблема, то же лечение
-        if(!groups.contains(group)) throw new TrainingException(TrainingErrorCode.GROUP_NOT_FOUND);
-        groups.remove(group);
+        if (!groups.remove(group)) throw new TrainingException(TrainingErrorCode.GROUP_NOT_FOUND);
     }
 
-    public void  removeGroup(String name) throws TrainingException {
+    public void removeGroup(String name) throws TrainingException {
         //Удаляет Group с данным названием из школы.Если группа с таким названием не найдена, выбрасывает
         //TrainingException с TrainingErrorCode.GROUP_NOT_FOUND
         // REVU можно просто for(Group group : groups)
-        Iterator<Group> iterator = groups.iterator();
-        while (iterator.hasNext()){
-            if(iterator.next().getName().equals(name)) {
-                iterator.remove();
+        for (Group group : groups) {
+            if (group.getName().equals(name)) {
+                groups.remove(group);
                 return;
             }
         }
-       //?
         throw new TrainingException(TrainingErrorCode.GROUP_NOT_FOUND);
     }
 
-    public boolean  containsGroup(Group group) {
+    public boolean containsGroup(Group group) {
         //Определяет, есть ли в школе такая группа.
         return groups.contains(group);
     }

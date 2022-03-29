@@ -2,7 +2,7 @@ package net.thumbtack.school.ttschool;
 
 import java.io.Serializable;
 
-public class Trainee implements Serializable {
+public class Trainee implements Serializable, Comparable<Trainee> {
 
     private String firstName;
     private String lastName;
@@ -12,20 +12,9 @@ public class Trainee implements Serializable {
         //Создает Trainee с указанными значениями полей.Для недопустимых значений входных параметров выбрасывает
         //TrainingException с соответствующим TrainingErrorCode
         // REVU вызовите сеттеры, не дублируйте код
-        if(firstName==null||firstName.equals("")){
-            throw new TrainingException(TrainingErrorCode.TRAINEE_WRONG_FIRSTNAME);
-        }
-
-        if(lastName==null||lastName.equals("")){
-            throw new TrainingException(TrainingErrorCode.TRAINEE_WRONG_LASTNAME);
-        }
-
-        if(rating<1||rating>5){
-            throw new TrainingException(TrainingErrorCode.TRAINEE_WRONG_RATING);
-        }
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.rating = rating;
+        setFirstName(firstName);
+        setLastName(lastName);
+        setRating(rating);
     }
 
     public String getFirstName() {
@@ -89,5 +78,17 @@ public class Trainee implements Serializable {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Trainee{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", rating=" + rating +
+                '}';
+    }
 
+    @Override
+    public int compareTo(Trainee t) {
+        return firstName.compareTo(t.firstName);
+    }
 }
