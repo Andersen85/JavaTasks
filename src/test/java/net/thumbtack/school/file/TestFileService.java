@@ -1,6 +1,6 @@
 package net.thumbtack.school.file;
 
-import net.thumbtack.school.exceptions.v3.GraphicException;
+import  net.thumbtack.school.exceptions.v3.GraphicException;
 import net.thumbtack.school.pictures.v3.Point;
 import net.thumbtack.school.pictures.v3.RectPicture;
 import net.thumbtack.school.ttschool.Trainee;
