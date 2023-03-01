@@ -3,6 +3,7 @@ package net.thumbtack.school.hospital.model;
 
 import net.thumbtack.school.hospital.dto.requests.RegisterDoctorDtoRequest;
 
+// REVU используйте lombok
 public class Doctor extends User {
 
     private String speciality;
@@ -12,6 +13,7 @@ public class Doctor extends User {
         this.speciality = speciality;
     }
 
+    // REVU классы модели не должны знать про классы DTO
     public Doctor(RegisterDoctorDtoRequest registerDoctorDtoRequest){
         super(registerDoctorDtoRequest.getFirstName(),
                 registerDoctorDtoRequest.getLastName(),

@@ -1,5 +1,6 @@
 package net.thumbtack.school.hospital.model;
 
+// REVU lombok
 public class DoctorAppointment {
     private String appointment;
     private String explanation;

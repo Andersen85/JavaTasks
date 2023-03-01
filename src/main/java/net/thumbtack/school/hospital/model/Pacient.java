@@ -1,10 +1,12 @@
 package net.thumbtack.school.hospital.model;
 
 
+// REVU используйте lombok
 import net.thumbtack.school.hospital.dto.requests.RegisterPacientDtoRequest;
 
 import java.util.List;
 
+// REVU Patient
 public class Pacient extends User {
 
     private String sickName;
@@ -17,6 +19,7 @@ public class Pacient extends User {
         this.doctorAppointmentsList = doctorAppointment;
     }
 
+    // REVU классы модели не должны знать про классы DTO
     public Pacient(RegisterPacientDtoRequest registerPacientDtoRequest){
         super(registerPacientDtoRequest.getFirstName(),
                 registerPacientDtoRequest.getLastName(),

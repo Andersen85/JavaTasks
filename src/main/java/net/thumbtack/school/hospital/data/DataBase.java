@@ -17,6 +17,7 @@ public class DataBase {
 
     private Map<Integer, User> mapIdToUser;
     private Map<String, User> mapTokenToUser;
+    // REVU не присвоено значение, поэтому null
     private Map<String, User> mapLoginToUser;
 
 
@@ -28,6 +29,9 @@ public class DataBase {
 
 
     public String insert(User user) {
+        // REVU проверки не вижу
+        // mapLoginToUser.putIfAbsent и проверить результат
+        // и только потом id ставить и токен выдавать
         //+Проверка дубликатов логина
         counter++;
         user.setId(counter);
@@ -39,9 +43,13 @@ public class DataBase {
     }
 
     public String login(String login, String password) throws ServerException {
+        // REVU это все в сервисе вплоть до // A
         User user = mapLoginToUser.get(login);
         if (user == null) throw new ServerException(ServerErrorCode.WRONG_LOGIN);
         if (user.getPassword().equals(password)) throw new ServerException(ServerErrorCode.WRONG_PASSWORD);
+        // A
+        // REVU containsValue - линейный поиск, медленно
+        // см.https://commons.apache.org/proper/commons-collections/apidocs/org/apache/commons/collections4/BidiMap.html
         if (mapTokenToUser.containsValue(user)) throw new ServerException(ServerErrorCode.USER_ALREADY_LOGINED);
         String token = UUID.randomUUID().toString();
         mapTokenToUser.put(token, user);
