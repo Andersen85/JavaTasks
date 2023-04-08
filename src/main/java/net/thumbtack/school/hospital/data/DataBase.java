@@ -16,56 +16,57 @@ public class DataBase {
     private int counter;
 
     private Map<Integer, User> mapIdToUser;
-    private Map<String, User> mapTokenToUser;
-    // REVU не присвоено значение, поэтому null
-    private Map<String, User> mapLoginToUser;
+    private BidiMap<String, String> mapTokenToUsersLogin;
+    private BidiMap<String, User> mapLoginToUser;
 
 
     public DataBase() {
         mapIdToUser = new HashMap<>();
-        mapTokenToUser = new HashMap<>();
+        mapTokenToUsersLogin = new DualHashBidiMap<>();
+        mapLoginToUser = new DualHashBidiMap<>();
         counter = 0;
     }
 
 
-    public String insert(User user) {
-        // REVU проверки не вижу
-        // mapLoginToUser.putIfAbsent и проверить результат
-        // и только потом id ставить и токен выдавать
-        //+Проверка дубликатов логина
+    public String insert(User user) throws ServerException {
         counter++;
         user.setId(counter);
-        mapIdToUser.put(counter, user);
+        //Проверка дубликатов логина
+        if (mapLoginToUser.inverseBidiMap().getKey(user) != null) {
+            throw new ServerException(ServerErrorCode.LOGIN_IS_ALREADY_TAKEN);
+        }
+        //Добавления в базу + проверки
         String token = UUID.randomUUID().toString();
-        mapTokenToUser.put(token, user);
-        mapLoginToUser.put(user.getLogin(), user);
+        if (mapIdToUser.putIfAbsent(counter, user) == null ||
+                mapTokenToUsersLogin.putIfAbsent(token, user.getLogin()) == null ||
+                mapLoginToUser.putIfAbsent(user.getLogin(), user) == null) {
+            throw new ServerException(ServerErrorCode.YOU_ARE_ALREADY_REGISTERED);
+        }
         return token;
     }
 
-    public String login(String login, String password) throws ServerException {
-        // REVU это все в сервисе вплоть до // A
-        User user = mapLoginToUser.get(login);
-        if (user == null) throw new ServerException(ServerErrorCode.WRONG_LOGIN);
-        if (user.getPassword().equals(password)) throw new ServerException(ServerErrorCode.WRONG_PASSWORD);
-        // A
-        // REVU containsValue - линейный поиск, медленно
-        // см.https://commons.apache.org/proper/commons-collections/apidocs/org/apache/commons/collections4/BidiMap.html
-        if (mapTokenToUser.containsValue(user)) throw new ServerException(ServerErrorCode.USER_ALREADY_LOGINED);
+
+    public String login(String login) throws ServerException {
+
+        if (mapTokenToUsersLogin.inverseBidiMap().getKey(login) != null) throw new
+                ServerException(ServerErrorCode.USER_ALREADY_LOGINED);
         String token = UUID.randomUUID().toString();
-        mapTokenToUser.put(token, user);
+        mapTokenToUsersLogin.put(token, login);
         return token;
     }
 
     public void logout(String token) throws ServerException {
-        if (mapTokenToUser.remove(token) == null) throw new ServerException(ServerErrorCode.YOU_ARE_NOT_LOGGED_IN);
+        if (mapTokenToUsersLogin.remove(token) == null)
+            throw new ServerException(ServerErrorCode.YOU_ARE_NOT_LOGGED_IN);
     }
 
     public void leave(String token) throws ServerException {
-        User user = mapTokenToUser.get(token);
-        if(user == null) throw new ServerException(ServerErrorCode.YOU_ARE_NOT_LOGGED_IN);
+        String login = mapTokenToUsersLogin.get(token);
+        if (login == null) throw new ServerException(ServerErrorCode.YOU_ARE_NOT_LOGGED_IN);
+        User user = mapLoginToUser.get(login);
         mapIdToUser.remove(user.getId());
         mapLoginToUser.remove(user.getLogin());
-        mapTokenToUser.remove(token);
+        mapTokenToUsersLogin.remove(token);
     }
 
     public static DataBase getDataBase() {
@@ -75,4 +76,7 @@ public class DataBase {
         return singletonDataBase;
     }
 
+    public Map<String, User> getMapLoginToUser() {
+        return mapLoginToUser;
+    }
 }

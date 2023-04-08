@@ -9,6 +9,7 @@ import net.thumbtack.school.hospital.dto.response.EmptyResponse;
 import net.thumbtack.school.hospital.dto.response.ErrorResponse;
 import net.thumbtack.school.hospital.dto.response.LoginUserDtoResponse;
 import net.thumbtack.school.hospital.exceptions.ServerException;
+import net.thumbtack.school.hospital.model.User;
 
 
 public class UserService {
@@ -18,9 +19,13 @@ public class UserService {
 
     public String login(String requestJsonString) {
         try {
-            LoginUserDtoRequest loginUserDtoRequest = gson.fromJson(requestJsonString, LoginUserDtoRequest.class);
+            LoginUserDtoRequest loginUserDtoRequest = ServiceUtils.getClassFromJson(requestJsonString,
+                    LoginUserDtoRequest.class);
+            User user = DataBase.getDataBase().getMapLoginToUser().get(loginUserDtoRequest.getLogin());
+            Validator.userLoginValidate(user, loginUserDtoRequest.getPassword());
+
             LoginUserDtoResponse loginUserDtoResponse = new LoginUserDtoResponse(
-                    userDao.login(loginUserDtoRequest.getLogin(), loginUserDtoRequest.getPassword()));
+                    userDao.login(loginUserDtoRequest.getLogin()));
             return gson.toJson(loginUserDtoResponse);
         } catch (ServerException e) {
             return gson.toJson(new ErrorResponse(e));
@@ -29,7 +34,8 @@ public class UserService {
 
     public String logout(String requestJsonString) {
         try {
-            TokenDtoRequest tokenDtoRequest = gson.fromJson(requestJsonString, TokenDtoRequest.class);
+            TokenDtoRequest tokenDtoRequest = ServiceUtils.getClassFromJson(requestJsonString, TokenDtoRequest.class);
+            Validator.tokenValidate(tokenDtoRequest);
             userDao.logout(tokenDtoRequest.getToken());
             return gson.toJson(new EmptyResponse());
         } catch (ServerException e) {
@@ -38,8 +44,9 @@ public class UserService {
     }
 
     public String leave(String requestJsonString) {
-        try{
-            TokenDtoRequest tokenDtoRequest = gson.fromJson(requestJsonString, TokenDtoRequest.class);
+        try {
+            TokenDtoRequest tokenDtoRequest = ServiceUtils.getClassFromJson(requestJsonString, TokenDtoRequest.class);
+            Validator.tokenValidate(tokenDtoRequest);
             userDao.leave(tokenDtoRequest.getToken());
             return gson.toJson(new EmptyResponse());
         } catch (ServerException e) {

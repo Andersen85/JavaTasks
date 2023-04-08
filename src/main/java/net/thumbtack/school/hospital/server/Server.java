@@ -2,6 +2,7 @@ package net.thumbtack.school.hospital.server;
 
 import com.google.gson.Gson;
 import net.thumbtack.school.hospital.dto.requests.RegisterDoctorDtoRequest;
+import net.thumbtack.school.hospital.exceptions.ServerException;
 import net.thumbtack.school.hospital.serviсe.DoctorService;
 import net.thumbtack.school.hospital.serviсe.PacientService;
 import net.thumbtack.school.hospital.serviсe.UserService;
@@ -25,12 +26,12 @@ public class Server {
 
     }
 
-    public String registerDoctor(String requestJsonString) {
+    public String registerDoctor(String requestJsonString) throws ServerException {
         //Регистрация доктора. Обязательно содержит token
         return doctorService.registerDoctor(requestJsonString);
     }
 
-    public String registerPacient(String requestJsonString) {
+    public String registerPacient(String requestJsonString) throws ServerException {
         //Регистрация пациента.
         return pacientService.registerPacient(requestJsonString);
     }
@@ -44,7 +45,7 @@ public class Server {
     }
 
     public void leave(String requestJsonString){
-
+        userService.leave(requestJsonString);
     }
 
 }
