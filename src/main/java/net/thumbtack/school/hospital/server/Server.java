@@ -1,7 +1,6 @@
 package net.thumbtack.school.hospital.server;
 
 import com.google.gson.Gson;
-import net.thumbtack.school.hospital.dto.requests.RegisterDoctorDtoRequest;
 import net.thumbtack.school.hospital.exceptions.ServerException;
 import net.thumbtack.school.hospital.serviсe.DoctorService;
 import net.thumbtack.school.hospital.serviсe.PacientService;
@@ -18,6 +17,7 @@ public class Server {
     public void startServer(String savedDataFileName) {
         //Производит всю необходимую инициализацию и запускает сервер.
         //Если savedDataFileName == null, восстановление состояния не производится, сервер стартует “с нуля”.
+
     }
 
     public void stopServer(String savedDataFileName) {
@@ -31,9 +31,9 @@ public class Server {
         return doctorService.registerDoctor(requestJsonString);
     }
 
-    public String registerPacient(String requestJsonString) throws ServerException {
+    public String registerPatient(String requestJsonString) throws ServerException {
         //Регистрация пациента.
-        return pacientService.registerPacient(requestJsonString);
+        return pacientService.registerPatient(requestJsonString);
     }
 
     public String login(String requestJsonString) {
@@ -47,5 +47,19 @@ public class Server {
     public void leave(String requestJsonString){
         userService.leave(requestJsonString);
     }
+
+    public String changePassword(String requestJsonString){
+        return userService.changePassword(requestJsonString);
+    }
+
+    public String addDoctorAppointment(String requestJsonString){
+        return doctorService.addDoctorAppointment(requestJsonString);
+    }
+
+    public String deleteDoctorAppointment(String reqestJsonString){
+        return doctorService.deleteDoctorAppointment(reqestJsonString);
+    }
+
+
 
 }

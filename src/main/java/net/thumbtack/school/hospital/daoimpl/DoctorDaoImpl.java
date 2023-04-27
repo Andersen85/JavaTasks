@@ -13,6 +13,16 @@ public class DoctorDaoImpl implements DoctorDao {
         return DataBase.getDataBase().insert(doctor);
     }
 
+    @Override
+    public void addAppointment(String token, String patientLogin, String appointment, String explanation) throws ServerException {
+        DataBase.getDataBase().addAppointment(token, patientLogin, appointment, explanation);
+    }
+
+    @Override
+    public void deleteAppointment(String token, String patientLogin, String appointment, String explanation) throws ServerException {
+        DataBase.getDataBase().deleteAppointment(token, patientLogin, appointment, explanation);
+    }
+
 
 
 }

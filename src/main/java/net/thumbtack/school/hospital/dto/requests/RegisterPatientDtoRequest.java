@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterPacientDtoRequest {
+public class RegisterPatientDtoRequest {
 
     private String firstName;
     private String lastName;
@@ -17,12 +17,13 @@ public class RegisterPacientDtoRequest {
     private String password;
     private String sickName;
     private List<DoctorAppointment> doctorAppointmentsList;
+    private String doctorToken;
 
 
     public boolean validateRegisterDoctor(){
-        //Проверки
+        //TODO Проверки
         return !firstName.equals("") && !lastName.equals("") &&
                 !login.equals("") && !password.equals("") &&
-                !sickName.equals("") && !doctorAppointmentsList.isEmpty();
+                !sickName.equals("") && !doctorAppointmentsList.isEmpty() && !doctorToken.isEmpty();
     }
 }

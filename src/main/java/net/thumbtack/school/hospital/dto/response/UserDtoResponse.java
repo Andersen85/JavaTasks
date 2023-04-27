@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 
-public class LoginUserDtoResponse {
+public class UserDtoResponse {
     private String token;
 }
