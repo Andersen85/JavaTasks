@@ -6,6 +6,7 @@ import net.thumbtack.school.hospital.daoimpl.DoctorDaoImpl;
 import net.thumbtack.school.hospital.data.DataBase;
 import net.thumbtack.school.hospital.dto.requests.AppointmentDtoRequest;
 import net.thumbtack.school.hospital.dto.requests.RegisterDoctorDtoRequest;
+import net.thumbtack.school.hospital.dto.requests.TokenDtoRequest;
 import net.thumbtack.school.hospital.dto.response.EmptyResponse;
 import net.thumbtack.school.hospital.dto.response.ErrorResponse;
 import net.thumbtack.school.hospital.dto.response.RegisterDoctorDtoResponse;
@@ -64,6 +65,15 @@ public class DoctorService {
         } catch (ServerException e) {
             return gson.toJson(new ErrorResponse(e));
         }
+    }
+
+    public String getAllPatientsByDoctor(String requestJsonString){
+        try{
+            TokenDtoRequest tokenDtoRequest = ServiceUtils.getClassFromJson()
+
+        } catch (ServerException e) {
+        return gson.toJson(new ErrorResponse(e));
+    }
     }
 
 }

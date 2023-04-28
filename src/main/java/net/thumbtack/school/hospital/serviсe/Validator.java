@@ -58,4 +58,5 @@ public class Validator {
                 appointmentDtoRequest.getExplanation().trim().equals(""))
         throw new ServerException(ServerErrorCode.WROND_DATA_IN_REQUEST);
     }
+
 }

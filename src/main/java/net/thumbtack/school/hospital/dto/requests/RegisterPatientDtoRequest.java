@@ -19,11 +19,4 @@ public class RegisterPatientDtoRequest {
     private List<DoctorAppointment> doctorAppointmentsList;
     private String doctorToken;
 
-
-    public boolean validateRegisterDoctor(){
-        //TODO Проверки
-        return !firstName.equals("") && !lastName.equals("") &&
-                !login.equals("") && !password.equals("") &&
-                !sickName.equals("") && !doctorAppointmentsList.isEmpty() && !doctorToken.isEmpty();
-    }
 }

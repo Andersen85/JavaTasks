@@ -56,10 +56,13 @@ public class Server {
         return doctorService.addDoctorAppointment(requestJsonString);
     }
 
-    public String deleteDoctorAppointment(String reqestJsonString){
-        return doctorService.deleteDoctorAppointment(reqestJsonString);
+    public String deleteDoctorAppointment(String requestJsonString){
+        return doctorService.deleteDoctorAppointment(requestJsonString);
     }
 
+    public String getAllPatientsByDoctor(String requestJsonString){
+        return doctorService.
+    }
 
 
 }
